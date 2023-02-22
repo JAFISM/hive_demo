@@ -157,9 +157,16 @@ class HiveDemoState extends State {
 
 
 
-  void updateitem(int itemkey, Map<String, String> map) {}
+  void updateitem(int itemkey, Map<String,dynamic> data)async {
+  await  box.put(itemkey, data);
+    _refreshItems();
+  }
 
-  void deleteitem(current_item) {}
+  void deleteitem(int itemKey) async {
+    await box.delete(itemKey);
+    _refreshItems();
 
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Successfully Deleted")));
+  }
 
 }
